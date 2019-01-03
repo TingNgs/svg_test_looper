@@ -25095,6 +25095,9 @@ function PaintControl(pannel) {
 	};
 
 	this.end = function () {
+    testPushData.push(rawPointData);
+    document.getElementById('array').innerHTML = JSON.stringify(testPushData);
+
     iForTest=0;
     loopForTest = testData.length;
     testLoopData();
@@ -25157,9 +25160,15 @@ function PaintControl(pannel) {
         
       UI.changeColor(UI.state.color);
       clearRawData();
-      iForTest++;
-      if( iForTest< loopForTest ){
-        setTimeout( testLoopData, 500 );
+
+    iForTest++;
+    if( iForTest< loopForTest ){
+      setTimeout( testLoopData, 500 );
+    }else{
+      _CurveManagement2.default.clearDrawing();
+      _CurveManagement2.default.clearScene();
+      iForTest=0;
+      setTimeout( testLoopData, 500 );
     }
   }
 	function clearRawData() {
@@ -25220,13 +25229,13 @@ function SkeletonControl(pannel) {
 	};
 
 	this.end = function () {
-    document.getElementById('array').innerHTML += JSON.stringify(rawPointData)+"<br>";
-
-    iForTest=0;
+    testPushData.push(rawPointData);
+    document.getElementById('array').innerHTML = JSON.stringify(testPushData);
+    /*iForTest=0;
     loopForTest = test2Data.length;
-    test2LoopData();
+    test2LoopData();*/
 
-		/*var smoothBizer = _Spline.BezierSpline.makeByPoints(rawPointData, error);
+		var smoothBizer = _Spline.BezierSpline.makeByPoints(rawPointData, error);
 		if (smoothBizer.length == 0) {
 			clearRawData();
 			return;
@@ -25234,7 +25243,7 @@ function SkeletonControl(pannel) {
 		var type = _UIManagement.state.leafBranchType;
 		_CurveManagement2.default.floralScene.push(new _nonStem.LeafBranch(smoothBizer, type));
 		_CurveManagement2.default.draw();
-		clearRawData();*/
+		clearRawData();
 	};
   function test2LoopData(){
     rawPointData = test2Data[iForTest];
@@ -32329,3 +32338,5 @@ test2Data.push([[977,642.390625],[976,642.390625],[976,643.390625],[975,643.3906
 test2Data.push([[889,663.390625],[888,663.390625],[887,663.390625],[882,663.390625],[878,663.390625],[872,663.390625],[871,663.390625],[869,663.390625],[867,664.390625],[865,664.390625],[863,664.390625],[860,664.390625],[855,665.390625],[854,665.390625],[853,665.390625],[852,665.390625],[851,665.390625],[850,665.390625],[849,665.390625],[848,665.390625],[847,665.390625],[846,664.390625],[844,663.390625],[842,663.390625],[841,663.390625],[840,663.390625],[839,663.390625],[838,663.390625],[837,663.390625],[836,663.390625],[836,662.390625]]);
 test2Data.push([[795,660.390625],[794,660.390625],[792,659.390625],[788,657.390625],[782,655.390625],[781,655.390625],[778,653.390625],[777,653.390625],[776,653.390625],[775,652.390625],[773,651.390625],[773,650.390625],[770,649.390625],[769,649.390625],[768,648.390625],[767,647.390625],[766,647.390625],[765,647.390625],[765,646.390625],[764,645.390625],[763,645.390625],[762,644.390625],[762,642.390625],[761,642.390625],[759,640.390625],[759,639.390625],[758,639.390625],[756,636.390625],[755,635.390625],[754,633.390625],[753,633.390625],[752,629.390625],[751,627.390625],[750,626.390625],[750,625.390625],[749,624.390625],[748,622.390625]]);
 
+
+var testPushData = [];
